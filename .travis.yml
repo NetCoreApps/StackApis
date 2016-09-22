@@ -1,0 +1,17 @@
+language: csharp
+solution: src/StackApis.sln
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode7.3
+      dotnet: 1.0.0-preview2-003121
+      mono: none
+      env: DOTNETCORE=1
+    - os: linux
+      dist: trusty
+      sudo: required
+      dotnet: 1.0.0-preview2-003121
+      mono: none
+      env: DOTNETCORE=1
+script:
+  - if [ -n "${DOTNETCORE}" ]; then cd src && dotnet restore && dotnet run; fi
