@@ -14,4 +14,4 @@ matrix:
       mono: none
       env: DOTNETCORE=1
 script:
-  - if [ -n "${DOTNETCORE}" ]; then cd src && dotnet restore && dotnet run; fi
+  - cd src/StackApis && dotnet restore && dotnet build
