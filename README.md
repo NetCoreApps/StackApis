@@ -1,4 +1,4 @@
-StackApis
+StackApis [![Build Status](https://travis-ci.org/NetCoreApps/StackApis.svg?branch=master)](https://travis-ci.org/NetCoreApps/StackApis)
 =========
 
 [![StackApis Home](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/apps/StackApis/stackapis-home.png)](http://stackapis.servicestack.net/)
