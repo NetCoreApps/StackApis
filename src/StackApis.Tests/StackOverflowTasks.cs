@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using NUnit.Framework;
@@ -20,15 +21,18 @@ namespace StackApis.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            dbFactory = new OrmLiteConnectionFactory(
-                "~/../../../StackApis/App_Data/db.sqlite".MapServerPath(), SqliteDialect.Provider);
+            var dbPath = "~/App_Data/db.sqlite".MapProjectPath();
+            if (File.Exists(dbPath))
+            {
+                File.Delete(dbPath);
+            }
+            dbFactory = new OrmLiteConnectionFactory(dbPath, SqliteDialect.Provider);
         }
 
         [Test]
         public void Import_from_StackOverflow()
         {
-            var client = new JsonServiceClient();
-            int numberOfPages = 10;
+            int numberOfPages = 100;
             int pageSize = 100;
             var dbQuestions = new List<Question>();
             var dbAnswers = new List<Answer>();
@@ -38,13 +42,13 @@ namespace StackApis.Tests
                 {
                     //Throttle queries
                     Thread.Sleep(100);
-                    var questionsResponse = client.Get("https://api.stackexchange.com/2.2/questions?page={0}&pagesize={1}&site={2}&tagged=servicestack"
-                        .Fmt(i, pageSize, "stackoverflow"));
+                    //StackOverflow API always returns gzipped response and .NET Core HttpWebRequest doesn't support auto uncompressing yet so need to decompress manually
+                    var bytes = $"https://api.stackexchange.com/2.2/questions?page={i}&pagesize={pageSize}&site=stackoverflow&tagged=servicestack".GetBytesFromUrl();
+                    var json = bytes.GUnzip();
 
                     QuestionsResponse qResponse;
                     using (new ConfigScope())
                     {
-                        var json = questionsResponse.ReadToEnd();
                         qResponse = json.FromJson<QuestionsResponse>();
                         dbQuestions.AddRange(qResponse.Items.Select(q => q.ConvertTo<Question>()));
                     }
@@ -54,12 +58,12 @@ namespace StackApis.Tests
                         .Where(x => x.AcceptedAnswerId != null)
                         .Select(x => x.AcceptedAnswerId).ToList();
 
-                    var answersResponse = client.Get("https://api.stackexchange.com/2.2/answers/{0}?sort=activity&site=stackoverflow"
-                        .Fmt(acceptedAnswers.Join(";")));
+                    var answersList = acceptedAnswers.Join(";");
+                    bytes = $"https://api.stackexchange.com/2.2/answers/{answersList}?sort=activity&site=stackoverflow".GetBytesFromUrl();
+                    json = bytes.GUnzip();
 
                     using (new ConfigScope())
                     {
-                        var json = answersResponse.ReadToEnd();
                         var aResponse = JsonSerializer.DeserializeFromString<AnswersResponse>(json);
                         dbAnswers.AddRange(aResponse.Items.Select(a => a.ConvertTo<Answer>()));
                     }

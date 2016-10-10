@@ -1,0 +1,45 @@
+﻿{
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [ "NETCORE_SUPPORT", "NETCORE", "DEBUG", "TRACE" ]
+      }
+    },
+    "Release": {
+      "buildOptions": {
+        "define": [ "NETCORE_SUPPORT", "NETCORE", "TRACE" ],
+        "optimize": true
+      }
+    }
+  },
+  "buildOptions": {
+    "debugType": "portable",
+    "emitEntryPoint": true
+  },
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.0"
+    },
+    "NUnitLite": "3.2.1",
+    "Microsoft.Data.SQLite": "1.0.*",
+    "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "ServiceStack.Core": "1.0.*",
+    "ServiceStack.Client.Core": "1.0.*",
+    "ServiceStack.Common.Core": "1.0.*",
+    "ServiceStack.Interfaces.Core": "1.0.*",
+    "ServiceStack.OrmLite.Core": "1.0.*",
+    "ServiceStack.OrmLite.Sqlite.Core": "1.0.*",
+    "ServiceStack.Text.Core": "1.0.*",
+    "StackApis.ServiceInterface": "1.0.0-*",
+    "StackApis.ServiceModel": "1.0.0-*"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50",
+      "dependencies": {
+        "System.Reflection.TypeExtensions": "4.1.0"
+      }
+    }
+  }
+}
