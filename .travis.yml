@@ -1,12 +1,10 @@
+sudo: required
 language: csharp
 solution: src/StackApis.sln
+services:
+  - docker
 matrix:
   include:
-    - os: osx
-      osx_image: xcode7.3
-      dotnet: 1.0.0-preview2-003121
-      mono: none
-      env: DOTNETCORE=1
     - os: linux
       dist: trusty
       sudo: required
@@ -14,4 +12,8 @@ matrix:
       mono: none
       env: DOTNETCORE=1
 script:
-  - cd src/StackApis && dotnet restore && dotnet build
+  - chmod +x ./set-envs.sh
+  - chmod +x ./build.sh
+  - chmod +x ./deploy.sh
+  - ./build.sh
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then ./deploy.sh; fi
