@@ -1,28 +1,24 @@
 {
-    "family": "__ECS_TASK__",
+    "family": "${ECS_TASK}",
     "networkMode": "bridge",
     "containerDefinitions": [
         {
-            "image": "__AWS_ECS_REPO_DOMAIN__/__IMAGE_NAME__:__IMAGE_VERSION__",
-            "name": "__IMAGE_NAME__-container",
+            "image": "${AWS_ECS_REPO_DOMAIN}/${IMAGE_NAME}:${IMAGE_VERSION}",
+            "name": "${IMAGE_NAME}-container",
             "cpu": 128,
             "memory": 256,
             "essential": true,
             "portMappings": [
                 {
                     "containerPort": 5000,
-                    "hostPort": 5006,
+                    "hostPort": 0,
                     "protocol": "tcp"
                 }
             ],
             "environment": [
                 {
                     "name": "VIRTUAL_HOST",
-                    "value": "stackapis.netcore.io"
-                },
-                {
-                    "name": "VIRTUAL_PORT",
-                    "value": "5006"
+                    "value": "${AWS_VIRTUAL_HOST}"
                 }
             ]
         }
