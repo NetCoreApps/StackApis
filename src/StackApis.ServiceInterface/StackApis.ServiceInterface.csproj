@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>StackApis.ServiceInterface</AssemblyName>
+    <PackageId>StackApis.ServiceInterface</PackageId>
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../StackApis.ServiceModel/StackApis.ServiceModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceStack.Text.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.Interfaces.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.Client.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.Common.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.OrmLite.Core" Version="1.0.*" />
+  </ItemGroup>
+
+</Project>

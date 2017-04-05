@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>StackApis.Tests</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>StackApis.Tests</PackageId>
+    <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../StackApis.ServiceInterface/StackApis.ServiceInterface.csproj" />
+    <ProjectReference Include="../StackApis.ServiceModel/StackApis.ServiceModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnitLite" Version="3.2.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.2" />
+    <PackageReference Include="ServiceStack.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.Client.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.Common.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.Interfaces.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.OrmLite.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack.Text.Core" Version="1.0.*" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>$(DefineConstants);NETCORE_SUPPORT;NETCORE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.1.0" />
+  </ItemGroup>
+
+</Project>
