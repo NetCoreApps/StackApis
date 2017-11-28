@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>StackApis.Tests</AssemblyName>
-    <OutputType>Exe</OutputType>
     <PackageId>StackApis.Tests</PackageId>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
@@ -17,6 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.9.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="2.*" />
     <PackageReference Include="ServiceStack" Version="5.*" />
     <PackageReference Include="ServiceStack.Client" Version="5.*" />
