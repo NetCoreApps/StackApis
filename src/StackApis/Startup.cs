@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ServiceStack;
 using ServiceStack.Admin;
-using ServiceStack.Api.Swagger;
+using ServiceStack.Api.OpenApi;
 using ServiceStack.Data;
 using ServiceStack.Mvc;
 using ServiceStack.OrmLite;
@@ -62,7 +62,7 @@ namespace StackApis
         /// Base constructor requires a name and assembly to locate web service classes. 
         /// </summary>
         public AppHost()
-            : base("StackApis", typeof(MyServices).GetAssembly()) { }
+            : base("StackApis", typeof(MyServices).Assembly) { }
 
         /// <summary>
         /// Application specific configuration
@@ -72,7 +72,7 @@ namespace StackApis
         {
             SetConfig(new HostConfig { UseCamelCase = false });
 
-            this.Plugins.Add(new SwaggerFeature { UseBootstrapTheme = true });
+            this.Plugins.Add(new OpenApiFeature());
             this.Plugins.Add(new PostmanFeature());
             this.Plugins.Add(new CorsFeature());
 
