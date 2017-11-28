@@ -1,4 +1,4 @@
-﻿@inherits ViewPage<QueryResponse<Question>>
+﻿@model QueryResponse<Question>
 @{
     ViewBag.Title = "ServiceStack StackOverflow questions";
 }
@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
 
-                    @foreach (var m in @Dto.Results.Take(25))
+                    @foreach (var m in @Model.Results.Take(25))
                     {
                         <tr>
                             <td>@m.Score</td>
